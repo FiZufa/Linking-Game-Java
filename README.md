@@ -96,10 +96,9 @@ The client program will handle game interactions and facilitate communication wi
 
 **java JDK**: openjdk-23 (Oracle OpenJDK 23.0.1)
 
-**javafx-fxml**: 22.0.1
+**javafx-fxml**: 23.0.1
 
-**javafx-controls**: 22.0.1
+**javafx-controls**: 23.0.1
 
-**maven**: 3.8.5
 
 ## Acknowledments
