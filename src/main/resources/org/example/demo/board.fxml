@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.canvas.Canvas?>
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.Controller" spacing="15" alignment="CENTER">
+  <!-- Turn indicator -->
+  <Label text=" " />
+  <HBox spacing="20" alignment="CENTER">
+    <!-- TODO: update this label according to the game status -->
+    <Label fx:id="turnLabel" text="You are in the waiting list..." style="-fx-font-size: 12px; -fx-text-fill: #000000;"/>
+  </HBox>
+
+  <ListView fx:id="waitingClientsListView" />
+
+  <!-- Score display -->
+  <HBox spacing="10">
+<!--    <Label text="Score: " style="-fx-font-size: 12px;"/>-->
+    <Label fx:id="scoreLabel" text="Score: 0" style="-fx-font-size: 16px; -fx-text-fill: #000000; -fx-padding: 0 0 0 15;"/>
+  </HBox>
+
+  <HBox spacing="10" alignment="CENTER">
+    <Label fx:id="notYourTurnLabel" text="It's not your turn" visible="false" style="-fx-font-size: 16px; -fx-text-fill: #c11a1a;"/>
+  </HBox>
+
+  <!-- Game board -->
+  <GridPane fx:id="gameBoard" VBox.vgrow="ALWAYS" hgap="5" vgap="5" alignment="CENTER">
+    <!-- The buttons representing the board will be dynamically created and added here -->
+<!--    <Canvas fx:id="gameCanvas" width="400" height="400" GridPane.rowIndex="0" GridPane.columnSpan="4"/>-->
+  </GridPane>
+
+  <!-- Opponent selection and buttons -->
+  <HBox spacing="10" alignment="CENTER">
+    <!-- Button to select opponent -->
+    <Button text="Select Opponent" fx:id="selectOpponentBtn" onAction="#handleOpponentSelection"/>
+  </HBox>
+
+  <!-- Other game-related buttons -->
+  <HBox spacing="10" alignment="CENTER">
+    <Button text="Player's status" fx:id="playerStatusBtn" onAction="#handlePlayerStatus" />
+    <Button text="Reset Game" fx:id="startGameBtn" onAction="#handleResetGame" />
+    <Button text="History Board" fx:id="historyBtn" onAction="#handleHistoryButton" />
+  </HBox>
+</VBox>
