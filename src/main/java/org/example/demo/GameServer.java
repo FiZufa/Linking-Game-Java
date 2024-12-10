@@ -10,7 +10,6 @@ public class GameServer {
     private static final int PORT = 12345;
     public static PlayerDataManager playerDataManager = new PlayerDataManager();
     static final Set<String> loggedInUsers = new HashSet<>();
-    static final List<ClientHandler> clients = new ArrayList<>();
     static final List<ClientHandler> allClients = new ArrayList<>();
     private static final List<ClientHandler> waitingClients = new ArrayList<>();
     private static List<GameSession> activeGames = new ArrayList<>();
@@ -191,13 +190,9 @@ public class GameServer {
             }
         }
 
-        // Notify players that the game session has ended
-//        session.getPlayerOne().sendMessage("The game session has ended. Returning to the waiting list.");
-//        session.getPlayerTwo().sendMessage("The game session has ended. Returning to the waiting list.");
-
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-        // Delay of 5 seconds (5000 milliseconds) before sending the message
+        // Delay of 5 seconds before sending the message
         scheduler.schedule(() -> {
             session.getPlayerOne().sendMessage("The game session has ended. Returning to the waiting list.");
             session.getPlayerTwo().sendMessage("The game session has ended. Returning to the waiting list.");
@@ -271,14 +266,9 @@ public class GameServer {
 
                 // If both players are disconnected, terminate the session
                 if (session.isBothPlayersDisconnected()) {
-                    // Log the session termination
-
-//                    waitingClients.remove(session.getPlayerOne());
-//                    waitingClients.remove(session.getPlayerTwo());
 
                     session.endGameSession();  // Handle session cleanup and logging
 
-                    // Optionally, notify any remaining connected players or admin (if needed)
                     System.out.println("Both players disconnected. Game session terminated.");
                     broadcastWaitingList();
 
@@ -321,7 +311,6 @@ public class GameServer {
             }
         }
 
-        // Ensure the client can start handling game messages by starting the thread
         new Thread(reconnectedClient).start();
     }
 

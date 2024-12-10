@@ -26,7 +26,6 @@ import javafx.util.Duration;
 
 import java.util.List;
 
-//import java.awt.Label;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class Controller {
     int[] position = new int[3];
 
     @FXML
-    private Label notYourTurnLabel; // fx:id="notYourTurnLabel"
+    private Label notYourTurnLabel;
     private GameClient gameClient;
     private boolean isFirstPlayer = false;
     public int boardSize;
@@ -144,7 +143,6 @@ public class Controller {
         delay.play();
     }
 
-
     public void handleResetGame(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Reset");
@@ -210,8 +208,6 @@ public class Controller {
         stage.show();
     }
 
-
-
     public void showNotYourTurnMessage(String message) {
         notYourTurnLabel.setText(message); // Set the message to the label
         notYourTurnLabel.setVisible(true); // Make the label visible
@@ -245,7 +241,6 @@ public class Controller {
             if (!client.isEmpty() && !client.equals(username)) {
                 waitingClientsListView.getItems().add(client); // Add the client to the ListView
                 otherPlayersExist = true; // Mark that other players are present
-                //selectOpponentBtn.setVisible(true);
             }
         }
 
@@ -282,12 +277,8 @@ public class Controller {
 
             whenSelectOppAndBoard();
 
-            gameClient.sendAction(message); // Send the message to the server
+            gameClient.sendAction(message);
 
-            // Optionally, show or hide other UI components for the game
-            // showGameBoard();  // A method to switch the view to the game board
-
-            // Update any other UI components here (e.g., hide buttons, etc.)
         }
     }
 
@@ -298,16 +289,8 @@ public class Controller {
 
         waitingClientsListView.setVisible(false);
         selectOpponentBtn.setVisible(false);
-        //gameCanvas.setVisible(false);
-    }
 
-    public void clearGameBoard() {
-        gameBoard.getChildren().clear(); // Remove all children from the GridPane
-        turnLabel.setVisible(false);
-        scoreLabel.setVisible(false);
     }
-
-    // When client select opponent and board size
     public void whenSelectOppAndBoard() {
         // display board
         // display scoreLabel
@@ -320,8 +303,6 @@ public class Controller {
 
 
     }
-
-    // When game over
     public void gameOverUI() {
         gameBoard.getChildren().clear();
         // hide turnLabel
@@ -335,58 +316,6 @@ public class Controller {
         waitingClientsListView.setVisible(true);
 
     }
-
-    public void displayConnection(List<Game.Coordinate> connection) {
-        // Clear any previous drawings (optional)
-        gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
-
-        // Start drawing the connection with animation
-        animateConnection(connection);
-    }
-
-    private void animateConnection(List<Game.Coordinate> connection) {
-        // Loop through the coordinates and animate the connection
-        for (int i = 1; i < connection.size(); i++) {
-            final int prevIndex = i - 1;
-            final int currentIndex = i;
-
-            // Delay the drawing of each line segment (like setTimeout in JavaScript)
-            PauseTransition pause = new PauseTransition(Duration.millis(currentIndex * 500)); // Delay between each line
-
-            pause.setOnFinished(event -> {
-                // Draw line between two coordinates
-                Game.Coordinate prevCoord = connection.get(prevIndex);
-                Game.Coordinate currentCoord = connection.get(currentIndex);
-                drawLine(prevCoord, currentCoord);
-            });
-
-            pause.play();
-        }
-    }
-
-    private void drawLine(Game.Coordinate startCoord, Game.Coordinate endCoord) {
-        double tileSize = 50;  // Assume each tile is 50x50 pixels (adjust based on your layout)
-
-        // Get the pixel positions from the coordinate system
-        double startX = startCoord.x * tileSize + tileSize / 2;
-        double startY = startCoord.y * tileSize + tileSize / 2;
-        double endX = endCoord.x * tileSize + tileSize / 2;
-        double endY = endCoord.y * tileSize + tileSize / 2;
-
-        // Set the line color and width
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(3);
-
-        // Draw a line between the two coordinates
-        gc.strokeLine(startX, startY, endX, endY);
-    }
-
-    public void onMatchFound(List<Game.Coordinate> connection) {
-        // Assuming the connection is a list of coordinates like [{x: 0, y: 0}, {x: 0, y: 1}, {x: 1, y: 1}]
-        displayConnection(connection);
-    }
-
-
     public void createGameBoard() {
 
         gameBoard.getChildren().clear();
@@ -501,22 +430,6 @@ public class Controller {
             System.out.println("Error loading images.");
         }
     }
-
-
-
-//    public static Image imageApple = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/apple.png")).toExternalForm());
-//    public static Image imageMango = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/mango.png")).toExternalForm());
-//    public static Image imageBlueberry = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/blueberry.png")).toExternalForm());
-//    public static Image imageCherry = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/cherry.png")).toExternalForm());
-//    public static Image imageGrape = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/grape.png")).toExternalForm());
-//    public static Image imageCarambola = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/carambola.png")).toExternalForm());
-//    public static Image imageKiwi = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/kiwi.png")).toExternalForm());
-//    public static Image imageOrange = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/orange.png")).toExternalForm());
-//    public static Image imagePeach = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/peach.png")).toExternalForm());
-//    public static Image imagePear = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/pear.png")).toExternalForm());
-//    public static Image imagePineapple = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/pineapple.png")).toExternalForm());
-//    public static Image imageWatermelon = new Image(Objects.requireNonNull(Game.class.getResource("/org/example/demo/watermelon.png")).toExternalForm());
-
 
 
 }

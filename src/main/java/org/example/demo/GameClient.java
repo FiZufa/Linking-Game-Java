@@ -5,8 +5,6 @@ import javafx.scene.control.Control;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameClient {
     private static final String SERVER_ADDRESS = "localhost";
@@ -205,20 +203,14 @@ public class GameClient {
                 controller.updateTurnLabel("Opponent's turn");
 
             } else if (message.startsWith("WINNER")) {
-                //controller.showGameEndPopUp(message);
                 if (message.contains(userName)){
-                    //controller.showPopup("Congratulation! You win!");
                     controller.showNotYourTurnMessage("Congratulation! You win!");
-                    //controller.showPopup("Congratulation! You win!");
 
                 } else {
-                    //controller.showPopup("Sorry! You lose!");
                     controller.showNotYourTurnMessage("Sorry! You lose!");
-                    //controller.showPopup("Sorry! You lose!");
                 }
 
             } else if (message.startsWith("TIE")) {
-               // controller.showGameEndPopUp(message);
                 controller.showPopup("Game Tie!");
                 controller.showNotYourTurnMessage("Game Tie");
 
@@ -231,8 +223,6 @@ public class GameClient {
                 controller.displayPlayerStatus(playerStatus);
 
             } else if (message.startsWith("The game session has ended")) {
-                //controller.showPopup(message);
-                //controller.clearGameBoard();
                 controller.gameOverUI();
             } else if (message.contains("has disconnected")) {
                 controller.showPopup(message);

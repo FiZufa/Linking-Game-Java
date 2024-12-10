@@ -11,23 +11,6 @@ public class Game {
     public int row;
     public int col;
 
-    private static final int[] dRow = {-1, 1, 0, 0, -1, -1, 1, 1};  // up, down, left, right, diagonal moves
-    private static final int[] dCol = {0, 0, -1, 1, -1, 1, -1, 1};
-
-    public static class Coordinate {
-        int x, y;
-
-        public Coordinate(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + x + "," + y + ")";
-        }
-    }
-
     public Game(int[][] generatedBoard) {
         this.board = generatedBoard;
         this.row = generatedBoard.length;
@@ -263,64 +246,6 @@ public class Game {
             }
         }
         return false; // No matches found
-    }
-
-    private boolean isValidMove(int r, int c) {
-        return r >= 0 && r < row && c >= 0 && c < col && board[r][c] == 0;
-    }
-
-    // BFS to find the shortest path from (startX, startY) to (endX, endY)
-    public List<Coordinate> getConnection(int startRow, int startCol, int endRow, int endCol) {
-        List<Coordinate> connection = new ArrayList<>();
-
-        // Early exit if the tiles don't match or are out of bounds
-        if (startRow < 0 || startCol < 0 || endRow < 0 || endCol < 0 ||
-                startRow >= row || startCol >= col || endRow >= row || endCol >= col) {
-            return connection;
-        }
-
-        // If the start and end are the same, return just that tile
-        if (startRow == endRow && startCol == endCol) {
-            connection.add(new Coordinate(startRow, startCol));
-            return connection;
-        }
-
-        // BFS initialization
-        Queue<List<Coordinate>> queue = new LinkedList<>();
-        boolean[][] visited = new boolean[row][col];
-
-        // Start the BFS with the starting position
-        List<Coordinate> initialPath = new ArrayList<>();
-        initialPath.add(new Coordinate(startRow, startCol));
-        queue.add(initialPath);
-        visited[startRow][startCol] = true;
-
-        // Perform BFS
-        while (!queue.isEmpty()) {
-            List<Coordinate> currentPath = queue.poll();
-            Coordinate lastTile = currentPath.get(currentPath.size() - 1);
-
-            // If we reached the destination, return the path
-            if (lastTile.x == endRow && lastTile.y == endCol) {
-                return currentPath;
-            }
-
-            // Try all possible directions (8 directions)
-            for (int i = 0; i < 8; i++) {
-                int newRow = lastTile.x + dRow[i];
-                int newCol = lastTile.y + dCol[i];
-
-                // If the move is valid and the cell has not been visited
-                if (isValidMove(newRow, newCol) && !visited[newRow][newCol]) {
-                    List<Coordinate> newPath = new ArrayList<>(currentPath);
-                    newPath.add(new Coordinate(newRow, newCol));
-                    queue.add(newPath);
-                    visited[newRow][newCol] = true;
-                }
-            }
-        }
-
-        return connection;  // Return an empty list if no valid path found
     }
 
 
