@@ -70,14 +70,6 @@ public class Controller {
 
     }
 
-    public void setFirstPlayer(boolean isFirstPlayer) {
-        this.isFirstPlayer = isFirstPlayer;
-    }
-
-    private void hideButtons() {
-
-    }
-
     public void setGameClient(GameClient client) {
         this.gameClient = client;
     }
