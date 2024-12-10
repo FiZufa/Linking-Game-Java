@@ -99,6 +99,3 @@ The client program will handle game interactions and facilitate communication wi
 **javafx-fxml**: 23.0.1
 
 **javafx-controls**: 23.0.1
-
-
-## Acknowledments
