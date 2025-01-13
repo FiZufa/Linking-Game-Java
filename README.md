@@ -40,55 +40,55 @@ The client program will handle game interactions and facilitate communication wi
 
 ### Source Files
 
-#### `ClientApp.java`
+1. `ClientApp.java`
 - The main entry point of the application.
 - Initializes the application and launches the JavaFX interface.
 
-#### `Game.java`
+2. `Game.java`
 - Manages the game logic, including rules and game state.
 - Controls the overall behavior of the game and validates moves.
 
-#### `Controller.java`
+3. `Controller.java`
 - Handles UI interactions and events on the game board screen (`board.fxml`).
 - Connects user actions with the game logic.
 
-#### `LoginController.java`
+4. `LoginController.java`
 - Manages user login and registration processes.
 - Handles events and transitions for the login and registration screen (`login.fxml`).
 
-#### `ClientHandler.java`
+5. `ClientHandler.java`
 - Facilitates communication between the server and connected clients.
 - Processes incoming and outgoing messages from individual clients.
 
-#### `GameServer.java`
+6. `GameServer.java`
 - Manages the server-side operations, including handling multiple client connections.
 - Maintains game sessions and synchronizes game states between players.
 
-#### `GameClient.java`
+7. `GameClient.java`
 - Handles the client-side network communication.
 - Connects to the `GameServer` and relays messages to and from the client application.
 
-#### `GameSession.java`
+8. `GameSession.java`
 - Represents an active game session.
 - Coordinates between players and ensures game rules are adhered to during gameplay.
 
 ### FXML Files
 
-#### `board.fxml`
+1. `board.fxml`
 - Defines the prototype for the game board UI.
 - Provides the layout and design of the game's main screen.
 
-#### `login.fxml`
+2. `login.fxml`
 - Defines the prototype for the login and registration UI.
 - Provides the layout for user authentication screens.
 
 ### Resources
 
-#### Images
+1. Images
 - Stores assets used in the game board, such as icons and images.
 - Icons sourced from [Iconfont](https://www.iconfont.cn/).
 
-#### Player Data
+2. Player Data
 - Stores player information in `playerdata.txt` file for login credentials.
 - Stores match history (players, game result, and time) in `playerHistory.txt`.
 
